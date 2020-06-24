@@ -1,7 +1,16 @@
 from bs4 import BeautifulSoup
 import requests
 from random import choice
+from csv import DictReader
+base = 'http://quotes.toscrape.com'
 
+def read_quotes(filename):
+  with open(filename, 'r') as file:
+    csv_reader = DictReader(file)
+    quotes = list(csv_reader)
+    return quotes
+
+read_quotes('quotes.csv')
 
 def start_game(quotes):
   quote = choice(quotes)
@@ -45,7 +54,10 @@ def start_game(quotes):
   else:
     print('ok goodbye')
 
+# To use csv data
+quotes = read_quotes('quotes.csv')
 
-quotes = scrape_quotes()
+# To scrape data
+# quotes = scrape_quotes()
 
 start_game(quotes)
